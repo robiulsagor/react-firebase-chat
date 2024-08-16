@@ -1,4 +1,144 @@
 .chat-left {
-  border: 1px solid red;
   flex: 1;
+  background: #000a0f;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 70vh;
+  min-height: 70vh;
+  position: relative;
+
+  .cl-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: relative;
+
+    .cl-logo-icon {
+      width: 145px;
+    }
+
+    .cl-menu-icon {
+      width: 25px;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+
+    .menu-dropdown {
+      position: absolute;
+      background: white;
+      padding: 20px;
+      top: 100%;
+      right: 10px;
+      width: 50%;
+      border-radius: 10px;
+
+      a {
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .cl-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #002670;
+    padding: 0 10px;
+    border-radius: 4px;
+    margin: 0 20px;
+
+    .cl-search-icon {
+      width: 15px;
+    }
+
+    .cl-search-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      flex: 1;
+      padding: 10px 0;
+      font-size: 13px;
+
+      &::placeholder {
+        color: lightgray;
+      }
+    }
+  }
+
+  .msg-user-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 5rem;
+
+    .msg-user {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 20px;
+
+      .msg-user-img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .msg-user-details {
+        color: #ddd;
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+          font-size: 14px;
+          margin-bottom: 0;
+          font-weight: 500;
+        }
+
+        span {
+          font-size: 11px;
+          color: #bfbfbf;
+        }
+      }
+
+      &:hover {
+        background: #0f74da;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .logout-btn-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.7rem;
+
+    .logout-btn {
+      background: #0f74da;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 80%;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+
+      &:hover {
+        background: #0c4a88;
+        transform: scale(1.1);
+      }
+    }
+  }
 }
