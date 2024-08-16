@@ -1,32 +1,60 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import "./signup.css";
 
 const Signup = () => {
   return (
     <div className="signinup-wrapper">
       <div className="signinup-container">
-        <div>
-          <img src="./logo_icon.png" alt="" />
+        <motion.div className="signinup-logo-container">
+          <img className="signinup_logo" src="./logo_icon.png" alt="" />
           <h2>Chat App</h2>
-        </div>
-        <form>
-          <h3>Sign Up</h3>
+        </motion.div>
 
-          <input type="text" name="" id="" />
-          <input type="text" name="" id="" />
-          <input type="text" name="" id="" />
+        <motion.div
+          className="form-container"
+          initial={{ opacity: 0, x: "40%" }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <form className="signinup-form">
+            <h3>Sign Up</h3>
 
-          <button type="submit">Sign Up</button>
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Enter A username"
+              required
+            />
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Enter your email"
+              required
+            />
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Enter your password"
+              required
+            />
 
-          <div>
-            <input type="checkbox" name="" id="" />
-            <span>Agree to the terms of use and privacy policy</span>
-          </div>
+            <button type="submit">Sign Up</button>
 
-          <p>
-            Already have an account? <Link to={"/"}></Link>
+            <div className="terms">
+              <input type="checkbox" name="" id="terms" required />
+              <label htmlFor="terms">
+                Agree to the terms of use and privacy policy
+              </label>
+            </div>
+          </form>
+
+          <p className="signinup-p">
+            Already have an account? <Link to={"/"}>Login</Link>
           </p>
-        </form>
+        </motion.div>
       </div>
     </div>
   );
