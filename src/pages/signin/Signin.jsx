@@ -1,9 +1,34 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../config/firebase";
 
 const SignIn = () => {
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await login(userData.email, userData.password);
+      if (res) {
+        navigate("/chat");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <motion.div className="signinup-wrapper">
+      <Helmet>
+        <title>Sign In - React Chat </title>
+      </Helmet>
       <div className="signinup-container">
         <motion.div className="signinup-logo-container">
           <img className="signinup_logo" src="./logo_icon.png" alt="" />
@@ -16,20 +41,26 @@ const SignIn = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <form className="signinup-form">
+          <form className="signinup-form" onSubmit={handleLogin}>
             <h3>Sign In</h3>
 
             <input
               type="text"
-              name=""
-              id=""
+              name="email"
+              value={userData.email}
+              onChange={(e) =>
+                setUserData({ ...userData, email: e.target.value })
+              }
               placeholder="Enter your email"
               required
             />
             <input
               type="text"
-              name=""
-              id=""
+              name="password"
+              value={userData.password}
+              onChange={(e) =>
+                setUserData({ ...userData, password: e.target.value })
+              }
               placeholder="Enter your password"
               required
             />

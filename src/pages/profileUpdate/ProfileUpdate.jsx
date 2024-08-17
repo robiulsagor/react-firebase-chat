@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import "./profile.css";
 
 const ProfileUpdate = () => {
@@ -6,6 +7,9 @@ const ProfileUpdate = () => {
 
   return (
     <div className="p-wrapper">
+      <Helmet>
+        <title>Update Profile - React Chat </title>
+      </Helmet>
       <div className="p-container">
         <div className="p-main">
           <form className="p-left">
@@ -34,9 +38,7 @@ const ProfileUpdate = () => {
           </form>
           <div className="p-right">
             <img
-              src={
-                img ? URL.createObjectURL(img) : "src/assets/avatar_icon.png"
-              }
+              src={img ? URL.createObjectURL(img) : "logo_icon.png"}
               alt=""
             />
           </div>
