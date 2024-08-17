@@ -45,7 +45,7 @@
 
   .msg-box {
     height: calc(100% - 100px);
-    padding-bottom: 80px;
+    padding-bottom: 50px;
     padding-top: 10px;
     overflow-y: scroll;
     display: flex;
@@ -71,12 +71,12 @@
         max-width: 200px;
         font-size: 13px;
         font-weight: 300;
-        margin-right: 50px;
+        margin-bottom: 30px;
       }
 
       div {
-        position: absolute;
-        bottom: -30px;
+        /* position: absolute;
+        bottom: -30px; */
 
         img {
           width: 27px;
@@ -98,7 +98,7 @@
 
       .msg {
         border-radius: 8px 8px 8px 0px;
-        margin-left: 50px;
+        /* margin-left: 50px; */
       }
     }
 
