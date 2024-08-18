@@ -13,7 +13,6 @@ import Signup from "./pages/signup/Signup";
 
 function App() {
   const navigate = useNavigate();
-  // const location = useLocation();
   const { loadUserData } = useContext(AppContext);
 
   useEffect(() => {
@@ -22,9 +21,6 @@ function App() {
         navigate("/");
       } else {
         await loadUserData(user);
-        // if (location.pathname === "/" || location.pathname === "/register") {
-        //   navigate("/chat");
-        // }
       }
     });
   }, []);
