@@ -30,8 +30,8 @@ const signup = async (username, email, password) => {
       username: username.toLowerCase(),
       email: email,
       name: "",
-      bio: "",
-      avatar: "Hi, I'm using chat app",
+      bio: "Hi, I'm using chat app",
+      avatar: "",
       lastSeen: Date.now(),
     });
     await setDoc(doc(db, "chats", user.uid), {
@@ -64,4 +64,4 @@ const logout = async () => {
   }
 };
 
-export { app, auth, login, logout, signup };
+export { app, auth, db, login, logout, signup };

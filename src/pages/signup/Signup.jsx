@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { signup } from "../../config/firebase";
 
 const Signup = () => {
-  const [userData, setUserData] = useState({
+  const [userInput, setuserInput] = useState({
     username: "",
     email: "",
     password: "",
@@ -15,7 +15,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await signup(userData.username, userData.email, userData.password);
+      await signup(userInput.username, userInput.email, userInput.password);
     } catch (error) {
       console.log(error);
     }
@@ -46,9 +46,9 @@ const Signup = () => {
               name="name"
               id=""
               placeholder="Enter A username"
-              value={userData.username}
+              value={userInput.username}
               onChange={(e) =>
-                setUserData({ ...userData, username: e.target.value })
+                setuserInput({ ...userInput, username: e.target.value })
               }
               required
             />
@@ -57,9 +57,9 @@ const Signup = () => {
               name="email"
               id=""
               placeholder="Enter your email"
-              value={userData.email}
+              value={userInput.email}
               onChange={(e) =>
-                setUserData({ ...userData, email: e.target.value })
+                setuserInput({ ...userInput, email: e.target.value })
               }
               required
             />
@@ -68,9 +68,9 @@ const Signup = () => {
               name="password"
               id=""
               placeholder="Enter your password"
-              value={userData.password}
+              value={userInput.password}
               onChange={(e) =>
-                setUserData({ ...userData, password: e.target.value })
+                setuserInput({ ...userInput, password: e.target.value })
               }
               required
             />

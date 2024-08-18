@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../config/firebase";
 
 const SignIn = () => {
-  const [userData, setUserData] = useState({
+  const [userInput, setuserInput] = useState({
     email: "",
     password: "",
   });
@@ -15,7 +15,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const res = await login(userData.email, userData.password);
+      const res = await login(userInput.email, userInput.password);
       if (res) {
         navigate("/chat");
       }
@@ -47,9 +47,9 @@ const SignIn = () => {
             <input
               type="text"
               name="email"
-              value={userData.email}
+              value={userInput.email}
               onChange={(e) =>
-                setUserData({ ...userData, email: e.target.value })
+                setuserInput({ ...userInput, email: e.target.value })
               }
               placeholder="Enter your email"
               required
@@ -57,9 +57,9 @@ const SignIn = () => {
             <input
               type="text"
               name="password"
-              value={userData.password}
+              value={userInput.password}
               onChange={(e) =>
-                setUserData({ ...userData, password: e.target.value })
+                setuserInput({ ...userInput, password: e.target.value })
               }
               placeholder="Enter your password"
               required
