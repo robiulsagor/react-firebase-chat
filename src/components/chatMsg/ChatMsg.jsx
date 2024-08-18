@@ -1,17 +1,69 @@
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  serverTimestamp,
+  updateDoc,
+} from "@firebase/firestore";
+import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { db } from "../../config/firebase";
+import { AppContext } from "../../context/AppContext";
 import "./chatMsg.css";
 
 const ChatMsg = () => {
-  return (
+  const { userData, messagesId, chatUser, messages, setMessages } =
+    useContext(AppContext);
+
+  const [input, setInput] = useState("");
+
+  const sendMsg = async (e) => {
+    try {
+      if (input && messagesId) {
+        await updateDoc(doc(db, "messages", messagesId), {
+          messages: arrayUnion({
+            text: input,
+            sId: userData.uid,
+            createdAt: new Date(),
+          }),
+        });
+
+        const userIds = [chatUser.rId, userData.uid];
+
+        userIds.forEach(async (id) => {
+          const userChatsRef = doc(db, "chats", id);
+          const userChatsSnapshot = await getDoc(userChatsRef);
+
+          if (userChatsSnapshot.exists) {
+            const userChatData = userChatsSnapshot.data();
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (messagesId) {
+      const unsub = onSnapshot(doc(db, "messages", messagesId), (res) => {
+        setMessages(res.data().messages.reverse());
+        console.log(res.data().messages.reverse());
+      });
+
+      return () => unsub();
+    }
+  }, [messagesId]);
+
+  return chatUser ? (
     <div className="chatMsg">
       <div className="msgTop">
         <div className="userInfo">
-          <img
-            className="user_img"
-            src="src/assets/profile_martin.png"
-            alt=""
-          />
+          <img className="user_img" src={chatUser?.userData?.avatar} alt="" />
           <h3>
-            Robiul Islam Sagar{" "}
+            {chatUser?.userData?.name}
             <img className="dot" src="src/assets/green_dot.png" alt="" />{" "}
           </h3>
         </div>
@@ -140,7 +192,12 @@ const ChatMsg = () => {
       </div>
 
       <div className="chat-input">
-        <input type="text" name="" id="" placeholder="Enter your message" />
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Enter your message"
+        />
 
         <input type="file" name="" id="file" accept="image/*" hidden />
         <label className="img" htmlFor="file">
@@ -148,6 +205,11 @@ const ChatMsg = () => {
         </label>
         <img className="img" src="src/assets/send_button.png" alt="" />
       </div>
+    </div>
+  ) : (
+    <div className="chat-welcome">
+      <img src="logo_icon.png" alt="" />
+      <p>Chat anytime, anywhere!</p>
     </div>
   );
 };

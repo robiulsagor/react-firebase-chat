@@ -9,6 +9,10 @@ export const AppContext = createContext(null);
 const AppContextProvider = ({ children }) => {
   const [userData, setUserData] = useState({});
   const [userChat, setUserChat] = useState({});
+  const [messagesId, setMessagesId] = useState(null);
+  const [chatUser, setChatUser] = useState(null);
+  const [messages, setMessages] = useState([]);
+
   const navigate = useNavigate();
 
   const loadUserData = async (data) => {
@@ -48,7 +52,7 @@ const AppContextProvider = ({ children }) => {
           const userRef = doc(db, "users", item.rId);
           const userSnap = await getDoc(userRef);
           const userData = userSnap.data();
-          tempData.push({ ...item, ...userData });
+          tempData.push({ ...item, userData });
         }
         setUserChat(tempData.sort((a, b) => b.updatedAt - a.updatedAt));
       });
@@ -62,6 +66,12 @@ const AppContextProvider = ({ children }) => {
     userChat,
     setUserChat,
     loadUserData,
+    messagesId,
+    setMessagesId,
+    chatUser,
+    setChatUser,
+    messages,
+    setMessages,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
